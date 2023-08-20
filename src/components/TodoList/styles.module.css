@@ -1,0 +1,128 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #000000 !important;
+  width: 500px;
+  margin: 30px auto;
+  border-radius: 8px;
+  padding: 50px;
+}
+
+.App h1 {
+  text-align: center;
+  color: #fff;
+}
+.start_form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  width: 100%;
+  margin: 20px;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+.form input[type="text"] {
+  padding: 10px;
+  width: 80%;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  font-size: 20px;
+}
+
+.form button[type="submit"] {
+  background-color: #ffffff;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 10px;
+  cursor: pointer;
+  width: 10%;
+}
+
+.form input[type="text"]:focus,
+.form button[type="submit"]:focus {
+  outline: none;
+}
+
+.todo_listItems {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.todo_item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  border: 1px solid #ccc; /* Add a border */
+  padding: 10px; /* Add some padding */
+  border-radius: 10px;
+}
+
+.item_content {
+  width: 60%;
+  font-size: 20px;
+}
+
+.todo_item button {
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.todo_item button:focus {
+  outline: none;
+}
+.update_item {
+  background-color: #ffffff;
+  color: #fff;
+}
+
+.delete_item {
+  background-color:#ffffff;
+  color: #ffffff;
+}
+
+.update_form {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.update_new_input {
+  width: 80%;
+  border-radius: 6px;
+  border: 1px solid #eee;
+  padding: 8px;
+  outline: none;
+  font-size: 20px;
+}
+
+.update_new_button {
+  background-color:#ffffff;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.cancel_new_button {
+  background-color:#ffffff;
+  color: #ffffff;
+  cursor: pointer;
+}
+.icon {
+  width: 30px;
+  height: 30px;
+}
