@@ -23,7 +23,7 @@ const Signup = () => {
     const handleSubmit = async (e)=> {
         e.preventDefault();
         try {
-            const url = "http://15.235.203.180:5050/api/users"
+            const url = "https://15.235.203.180:5050/api/users"
             const {data:res} = await axios.post(url,data);
             navigate("/signin");
             console.log(res.message);
