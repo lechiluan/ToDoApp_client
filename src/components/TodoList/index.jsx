@@ -27,7 +27,7 @@ function TodoList() {
         // Extract user information from the decoded payload
         const id = user._id;
         document.title = "TodoApp";
-        const res = await axios.get(`https://15.235.202.83:5050/api/items/${id}`);
+        const res = await axios.get(`https://15.235.202.83:443/api/items/${id}`);
         setListItems(res.data);
       } catch (error) {
         console.log(error);
@@ -50,7 +50,7 @@ function TodoList() {
       // Extract user information from the decoded payload
       const id = user._id;
 
-      const res = await axios.post(`https://15.235.202.83:5050/api/item/${id}`, {
+      const res = await axios.post(`https://15.235.202.83:443/api/item/${id}`, {
         item: itemText,
       });
       setItemText((prev) => [...prev, res.data]);
@@ -67,7 +67,7 @@ function TodoList() {
   //delete item
   const deleteItem = async (id) => {
     try {
-      await axios.delete(`https://15.235.202.83:5050/api/item/${id}`);
+      await axios.delete(`https://15.235.202.83:443/api/item/${id}`);
       const newList = listItems.filter((item) => item._id !== id);
       setListItems(newList);
     } catch (error) {
@@ -85,7 +85,7 @@ function TodoList() {
       }
   
       const res = await axios.put(
-        `https://15.235.202.83:5050/api/item/${isUpdating}`,
+        `https://15.235.202.83:443/api/item/${isUpdating}`,
         { item: itemTextUpdate }
       );
   
@@ -140,7 +140,7 @@ function TodoList() {
   const toggleCompletion = async (id, isCompleted) => {
     try {
       const res = await axios.put(
-        `https://15.235.202.83:5050/api/item/status/${id}`,
+        `https://15.235.202.83:443/api/item/status/${id}`,
         { status: !isCompleted } // Toggle the status
       );
 

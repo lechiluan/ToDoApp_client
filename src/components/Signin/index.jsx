@@ -21,7 +21,7 @@ const Signup = () => {
     const handleSubmit = async (e)=> {
         e.preventDefault();
         try {
-            const url = "https://15.235.202.83:5050/api/auth"
+            const url = "https://15.235.202.83:443/api/auth"
             const {data:res} = await axios.post(url,data);
             localStorage.setItem("token",res.data);
                         window.location="/"
