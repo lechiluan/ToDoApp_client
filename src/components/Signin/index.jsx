@@ -21,7 +21,7 @@ const Signup = () => {
     const handleSubmit = async (e)=> {
         e.preventDefault();
         try {
-            const url = "http://15.235.202.83:5050/api/auth"
+            const url = "http://luanle.gcalls.vn:5050/api/auth"
             const {data:res} = await axios.post(url,data);
             localStorage.setItem("token",res.data);
                         window.location="/"
