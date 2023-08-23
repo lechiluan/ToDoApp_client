@@ -23,7 +23,7 @@ const Signup = () => {
     const handleSubmit = async (e)=> {
         e.preventDefault();
         try {
-            const url = "http://luanle.gcalls.vn:5050/api/users"
+            const url = "https://luanle.gcalls.vn:5050/api/users"
             const {data:res} = await axios.post(url,data);
             navigate("/signin");
             console.log(res.message);
