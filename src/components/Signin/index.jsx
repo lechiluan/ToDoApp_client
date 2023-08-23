@@ -45,7 +45,6 @@ const Signup = () => {
                                 onChange={handleChange}
                                 value={data.email} required className={styles.input}  
                             />
-
                             <input 
                                 type="password"  placeholder='Password' name='password' 
                                 onChange={handleChange}
