@@ -39,7 +39,7 @@ const Signup = () => {
             <div className={styles.signin_form_container}>
                 <div className={styles.left}>
                     <form className={styles.form_container} onSubmit={handleSubmit}>
-                            <h1>Sign In to Todo App</h1>
+                            <h1>Sign In</h1>
                             <input 
                                 type="email"  placeholder='Email' name='email' 
                                 onChange={handleChange}
@@ -54,12 +54,12 @@ const Signup = () => {
                             {/* display error */}
                             {error && <div className={styles.error_msg}>{error}</div>}
                             <button type="submit" className={styles.btn_green}>
-                                Sign in
+                                Sign In
                             </button>
                         </form>
                 </div>
                 <div className={styles.right}>
-                <h1>Register Here</h1>
+                <h1>New to Todo App?</h1>
                     <Link to="/signup">
                         <button type="submit" className={styles.btn_white}>Sign Up</button>
                     </Link>
