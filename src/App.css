@@ -1,3 +1,7 @@
+#root {
+  font-family: sans-serif;
+  text-align: center;
+}
 .App {
   display: flex;
   flex-direction: column;
