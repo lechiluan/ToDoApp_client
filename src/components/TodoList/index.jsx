@@ -12,7 +12,6 @@ function TodoList() {
   const [isUpdating, setIsUpdating] = useState("");
   const [itemTextUpdate, setItemTextUpdate] = useState("");
 
-
   //create to fecth all item from db -- use useEffect hook
   useEffect(() => {
     const getItemList = async () => {
@@ -27,7 +26,9 @@ function TodoList() {
         // Extract user information from the decoded payload
         const id = user._id;
         document.title = "TodoApp";
-        const res = await axios.get(`https://luanle.gcalls.vn:443/api/items/${id}`);
+        const res = await axios.get(
+          `https://luanle.gcalls.vn:443/api/items/${id}`
+        );
         setListItems(res.data);
       } catch (error) {
         console.log(error);
@@ -50,12 +51,15 @@ function TodoList() {
       // Extract user information from the decoded payload
       const id = user._id;
 
-      const res = await axios.post(`https://luanle.gcalls.vn:443/api/item/${id}`, {
-        item: itemText,
-      });
+      const res = await axios.post(
+        `https://luanle.gcalls.vn:443/api/item/${id}`,
+        {
+          item: itemText,
+        }
+      );
       setItemText((prev) => [...prev, res.data]);
       setItemText("");
-      
+
       // Display item in the list without refreshing the page
       const newList = [...listItems, res.data];
       setListItems(newList);
@@ -83,18 +87,18 @@ function TodoList() {
         setIsUpdating("");
         return;
       }
-  
+
       const res = await axios.put(
         `https://luanle.gcalls.vn:443/api/item/${isUpdating}`,
         { item: itemTextUpdate }
       );
-  
+
       // Update the listItems state with the updated item
       const updatedItems = listItems.map((item) =>
         item._id === isUpdating ? { ...item, item: itemTextUpdate } : item
       );
       setListItems(updatedItems);
-  
+
       setItemTextUpdate("");
       setIsUpdating("");
       console.log(res.data);
@@ -135,8 +139,7 @@ function TodoList() {
       </button>
     </form>
   );
-  
-  
+
   const toggleCompletion = async (id, isCompleted) => {
     try {
       const res = await axios.put(
@@ -154,70 +157,94 @@ function TodoList() {
     }
   };
 
-return (
-  <div className={styles.App}>
-    <h1>Create Your To Do Here</h1>
-    <div className={styles.start_form}>
-      <form className={styles.form} onSubmit={(e) => addItem(e)}>
-        <input
-          type="text"
-          placeholder="Add Your Todo"
-          required
-          onChange={(e) => {
-            setItemText(e.target.value);
-          }}
-          value={itemText}
-        ></input>
-        <button type="submit">
-        <img src={addIcon} alt="add icon" className={styles.icon} />
-        </button>
-      </form>
-      <div className={styles.todo_listItems}>
-        {listItems.map((item) => (
-          <div className={styles.todo_item} key={item._id}>
-            <input
-              type="checkbox"
-              checked={item.status}
-              onChange={() => toggleCompletion(item._id, item.status)}
-            />
-            {isUpdating === item._id ? (
-              renderUpdateForm(item.item) // Pass the current item text
-            ) : (
-              <>
-                <p
-                  className={`${styles.item_content} ${
-                    item.status ? styles.completed : ""
-                  }`}
-                  style={{
-                    textDecoration: item.status ? 'line-through' : 'none'
-                  }}
-                >
-                  {item.item}
-                </p>
-                <button
-                  className={styles.update_item}
-                  onClick={() => {
-                    setIsUpdating(item._id);
-                  }}
-                >
-                <img src={editIcon} alt="Edit icon" className={styles.icon} />
-                </button>
-                <button
-                  className={styles.delete_item}
-                  onClick={() => {
-                    deleteItem(item._id);
-                  }}
-                >
-                <img src={deleteIcon} alt="Delete icon" className={styles.icon} />
-                </button>
-              </>
-            )}
-          </div>
-        ))}
+  const deleteAllFalseItems = async () => {
+    try {
+      await axios.delete(`https://luanle.gcalls.vn:443/api/delete_all`);
+      const updatedItems = listItems.filter((item) => item.status === true);
+      setListItems(updatedItems);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return (
+    <div className={styles.App}>
+      <h1>Create Your To Do Here</h1>
+      <button
+        className={styles.delete_all_button}
+        onClick={deleteAllFalseItems}
+      >
+        Delete All False Items
+      </button>
+      <div className={styles.start_form}>
+        <form className={styles.form} onSubmit={(e) => addItem(e)}>
+          <input
+            type="text"
+            placeholder="Add Your Todo"
+            required
+            onChange={(e) => {
+              setItemText(e.target.value);
+            }}
+            value={itemText}
+          ></input>
+          <button type="submit">
+            <img src={addIcon} alt="add icon" className={styles.icon} />
+          </button>
+        </form>
+        <div className={styles.todo_listItems}>
+          {listItems.map((item) => (
+            <div className={styles.todo_item} key={item._id}>
+              <input
+                type="checkbox"
+                checked={item.status}
+                onChange={() => toggleCompletion(item._id, item.status)}
+              />
+              {isUpdating === item._id ? (
+                renderUpdateForm(item.item) // Pass the current item text
+              ) : (
+                <>
+                  <p
+                    className={`${styles.item_content} ${
+                      item.status ? styles.completed : ""
+                    }`}
+                    style={{
+                      textDecoration: item.status ? "line-through" : "none",
+                    }}
+                  >
+                    {item.item}
+                  </p>
+                  <button
+                    className={styles.update_item}
+                    onClick={() => {
+                      setIsUpdating(item._id);
+                    }}
+                  >
+                    <img
+                      src={editIcon}
+                      alt="Edit icon"
+                      className={styles.icon}
+                    />
+                  </button>
+                  <button
+                    className={styles.delete_item}
+                    onClick={() => {
+                      deleteItem(item._id);
+                    }}
+                  >
+                    <img
+                      src={deleteIcon}
+                      alt="Delete icon"
+                      className={styles.icon}
+                    />
+                  </button>
+                </>
+              )}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
 }
 
 export default TodoList;
